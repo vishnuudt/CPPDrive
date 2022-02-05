@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string.h>
 #include <vector>
+#include <array>
 
 using namespace std;
 
@@ -30,7 +31,7 @@ public:
 
     int size();
 
-    void insert(int i);
+    void insert(int i, string key);
 
     int maxIndex();
 
@@ -39,8 +40,17 @@ public:
 
 private:
     std::string name{};
-    std::vector<int> priority_queue{};
-    std::vector<int> inverse_queue{};
+    int n{};
+    int maxN{};
+    std::array<int, 11> priority_queue{};
+    std::array<int, 11> inverse_queue{};
+    std::array<string, 11> keys{};
+
+
+   bool greater(int i, int j);
+   void exch(int i, int j);
+   void swim(int k);
+   void sink(int k);
 
 };
 
