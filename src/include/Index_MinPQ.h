@@ -33,7 +33,11 @@ public:
 
     void insert(int i, string key);
 
-    int maxIndex();
+    int delMin();
+
+    void decreaseKey(int i, string key);
+
+    void increaseKey(int i, string key);
 
     static void exportItem();
     

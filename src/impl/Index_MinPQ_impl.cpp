@@ -3,8 +3,11 @@
 namespace Drive::IndexedMinPQ{
 
     IndexedMinPQ::IndexedMinPQ(int max):name{}, n{0}, maxN{max}, 
-    priority_queue{0}, inverse_queue{0},
-    keys{""}{}
+    priority_queue{}, inverse_queue{},
+    keys{""}{
+        priority_queue.fill(-1);
+        inverse_queue.fill(-1); 
+    }
 
     IndexedMinPQ::~IndexedMinPQ(){
         std::cout << "des minPQ" << std::endl;
@@ -29,20 +32,20 @@ namespace Drive::IndexedMinPQ{
     }
 
     bool IndexedMinPQ::isEmpty(){
-        return true;
+        return n == 0;
     }
 
     bool IndexedMinPQ::contains(int i){
-        return true;
+        return inverse_queue[i] != -1;
     }
 
     int IndexedMinPQ::size(){
-        return 0;
+        return n;
     }
 
     void IndexedMinPQ::insert(int i, string key){
         if (i < 0 | i >= maxN) cerr << "index >= capacity: " << endl;
-        // if (contains(i)) throw new IllegalArgumentException("index is already in the priority queue");
+        if (contains(i)) cerr << "index is already in the priority queue" << endl;
         n++;
         inverse_queue[i] = n;
         priority_queue[n] = i;
@@ -83,10 +86,38 @@ namespace Drive::IndexedMinPQ{
         }
     }
 
-
-    int IndexedMinPQ::maxIndex(){
-        return 1;
+    int IndexedMinPQ::delMin() {
+        if (n == 0) cerr << "Priority queue underflow" <<endl;
+        int min = priority_queue[1];
+        exch(1, n--);
+        sink(1);
+        
+        inverse_queue[min] = -1;        
+        keys[min] = "";   
+        priority_queue[n+1] = -1;        // not needed
+        return min;
     }
+
+    void IndexedMinPQ::decreaseKey(int i, string key) {
+        if (!contains(i)) cerr << "index is not in the priority queue" << endl;
+        if (keys[i].compare(key) == 0)
+            cerr << "Calling decreaseKey() with a key equal to the key in the priority queue" << endl;
+        if (keys[i].compare(key) < 0)
+            cerr << "Calling decreaseKey() with a key strictly greater than the key in the priority queue" << endl;
+        keys[i] = key;
+        swim(inverse_queue[i]);
+    }
+
+    void IndexedMinPQ::increaseKey(int i, string key) {
+                if (!contains(i)) cerr << "index is not in the priority queue" << endl;
+        if (keys[i].compare(key) == 0)
+            cerr << "Calling decreaseKey() with a key equal to the key in the priority queue" << endl;
+        if (keys[i].compare(key) > 0)
+            cerr << "Calling decreaseKey() with a key strictly greater than the key in the priority queue" << endl;
+        keys[i] = key;
+        sink(inverse_queue[i]);
+    }
+
 
     void IndexedMinPQ::exportItem(){
         std::array<string, 10> strings = { std::string("it"), 
@@ -98,15 +129,18 @@ namespace Drive::IndexedMinPQ{
             for (int i = 0; i < strings.size(); i++) {
                 pq.insert(i, strings[i]);
             }
+
+             // delete and print each key
+            while (!pq.isEmpty()) {
+                int i = pq.delMin();
+                cout << i << strings[i] << endl;
+            }
+
         }
 
-        // delete and print each key
-        /* while (!pq.isEmpty()) {
-            int i = pq.delMin();
-            StdOut.println(i + " " + strings[i]);
-        }
+       
         
-
+        /*
         // reinsert the same strings
         for (int i = 0; i < strings.length; i++) {
             pq.insert(i, strings[i]);
