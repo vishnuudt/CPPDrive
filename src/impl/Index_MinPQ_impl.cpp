@@ -43,6 +43,10 @@ namespace Drive::IndexedMinPQ{
         return n;
     }
 
+    string IndexedMinPQ::peek(int i){
+        return keys[i];
+    }
+
     void IndexedMinPQ::insert(int i, string key){
         if (i < 0 | i >= maxN) cerr << "index >= capacity: " << endl;
         if (contains(i)) cerr << "index is already in the priority queue" << endl;
@@ -93,7 +97,7 @@ namespace Drive::IndexedMinPQ{
         sink(1);
         
         inverse_queue[min] = -1;        
-        keys[min] = "";   
+        // keys[min] = "";   
         priority_queue[n+1] = -1;        // not needed
         return min;
     }
@@ -133,9 +137,23 @@ namespace Drive::IndexedMinPQ{
              // delete and print each key
             while (!pq.isEmpty()) {
                 int i = pq.delMin();
-                cout << i << strings[i] << endl;
+                cout << i << " " << pq.peek(i) << endl;
             }
 
+            // reinsert
+            for (int i = 0; i < strings.size(); i++) {
+                pq.insert(i, strings[i]);
+            }
+
+            cout << "==== now changing keys =====" << endl;
+            // change key selectively
+            pq.decreaseKey(2, "queue");
+            pq.increaseKey(1, "xerox");
+
+            while (!pq.isEmpty()) {
+                int i = pq.delMin();
+                cout << i << " " << pq.peek(i) << endl;
+            }
         }
 
        

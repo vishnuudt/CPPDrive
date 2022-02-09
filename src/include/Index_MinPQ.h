@@ -39,6 +39,8 @@ public:
 
     void increaseKey(int i, string key);
 
+    string peek(int i);
+
     static void exportItem();
     
 
