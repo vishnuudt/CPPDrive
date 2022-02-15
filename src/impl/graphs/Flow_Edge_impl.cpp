@@ -66,5 +66,9 @@ void FlowEdge::addResidualFlowTo(int vertex, double delta){
     cerr << "wrong expectation addResidualFlowTo" << endl;
 }
 
+string FlowEdge::toString(){
+ return "from:" + std::to_string(this->from()) + " to:" + std::to_string(this->to());
+}
+
 }
 

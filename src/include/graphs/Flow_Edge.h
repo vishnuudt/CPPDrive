@@ -38,6 +38,8 @@ public:
 
     void addResidualFlowTo(int vertex, double delta);
 
+    string toString();
+
 private:
     unsigned int v{};
     unsigned int w{};
