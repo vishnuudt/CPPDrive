@@ -8,8 +8,8 @@ namespace Drive::CPP17::Graphs{
     num_edges(e), vect_FlowEdgeLists{v, fListFlowEdges(e)}
     {
         for (int i = 0 ; i < num_vertices; ++i){
-            const auto& list = vect_FlowEdgeLists[i];
-            cout << list.empty() << endl;
+            auto& list = vect_FlowEdgeLists[i];
+            list.clear();
         }
     }
 
