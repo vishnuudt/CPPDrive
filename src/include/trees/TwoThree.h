@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <queue>
 
 #include "trees/Node.h"
 
@@ -11,9 +12,7 @@ namespace Drive::CPP17::Trees{
 
 class TwoThreeTree{
 public:
-        TwoThreeTree() = delete;
-
-        TwoThreeTree(NodeUniqPtr root);
+        TwoThreeTree();
 
         virtual ~TwoThreeTree();
 
@@ -29,6 +28,8 @@ public:
 
         void put(string key, int value);
 
+        queue<string> keys(string lo, string hi);
+
         static void exportItem();
 
 private:
@@ -43,7 +44,8 @@ private:
     bool isRed(NodeUniqPtr& x);
     int count(NodeUniqPtr& x);
 
-
+    void keys(NodeUniqPtr& x, queue<string>& queue, 
+              string lo, string hi); 
 
 };
 }
