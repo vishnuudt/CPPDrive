@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <memory>
 
 using namespace std;
 
@@ -15,7 +16,13 @@ namespace Drive::strings{
 
     class KnuthMorrisPratt{
         public:
-            bool search(string one, string two);
+            KnuthMorrisPratt(string pattern);
+            bool search(string one);
+
+        private:
+            int radix;       // the radix
+            int stringLength;       // length of pattern
+            int** dfa;       // the KMP automoton
 
 
     };
