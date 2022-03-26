@@ -25,35 +25,92 @@ namespace Drive::strings{
         return false;
     }
 
-    KnuthMorrisPratt::KnuthMorrisPratt(string pattern){
-        this->radix = 256;
+
+
+    void KnuthMorrisPratt::setup(string pattern){
+        this->radix = new char[]{'1','2', '3', '4', '5', '\0'};
         this->stringLength = pattern.length();
 
         // build DFA from pattern
-        dfa = new int*[radix]; 
-        for (int i = 0; i < radix ; ++i){
+        // dfa = new int*[radix]; 
+        /*for (char i = 0; i < radix ; ++i){
             dfa[i] = new int[stringLength];
+        }*/
+        char* head = this->radix;
+        while (*head != '\0'){
+            dfa[*head] = new int[stringLength];
+            head++;
         }
-        int p0 = pattern[0];
+
+        char& p0 = pattern[0];
+        cout << p0 << endl;
         dfa[p0][0] = 1; 
         for (int x = 0, j = 1; j < stringLength; j++) {
-            for (int c = 0; c < radix; c++) {
+            /*for (int c = 0; c < radix; c++) {
                 dfa[c][j] = dfa[c][x]; // Copy mismatch cases.
-            }                     
+            } */
+
+            char* head = this->radix;
+            while (*head != '\0'){
+                char& c = *head;
+                dfa[c][j] = dfa[c][x];
+                head++;
+            }
+
             dfa[pattern[j]][j] = j+1;   // Set match case. 
             x = dfa[pattern[j]][x];     // Update restart state. 
+            print(dfa);
         } 
     }
 
-    bool KnuthMorrisPratt::search(string text){
+
+
+    bool KnuthMorrisPratt::search(string text, string pattern){
+
+        setup(pattern);
+
         // simulate operation of DFA on text
         int n = text.length();
         int i, j;
         for (i = 0, j = 0; i < n && j < stringLength; i++) {
-            j = dfa[text[i]][j];
+            char & c = text[i];
+            j = dfa[c][j];
         }
+
+        tearDown();
+
         if (j == stringLength) return i - stringLength;    // found
         return n;   
+    }
+
+    void KnuthMorrisPratt::tearDown(){
+        /*for(int i = 0; i < radix ; ++i){
+            delete [] dfa[i];
+        }
+        delete [] dfa;
+        radix = 0 ;
+        stringLength = 0;*/
+    }
+
+    void KnuthMorrisPratt::print(int** dfa){
+        /*for (int i = 0; i < radix ; ++i){
+            int* column = dfa[i];
+            for (int j = 0; j < stringLength; ++j){
+                cout << column[j] << ",";
+            }
+            cout << endl;
+        }*/
+    }
+
+    void KnuthMorrisPratt::print(unordered_map<char, int*> dfa){
+        for (auto iter = dfa.cbegin(); iter != dfa.cend(); ++iter){
+            cout << iter->first << ",";
+            for (int j = 0; j < stringLength; ++j){
+                cout << iter->second[j] << ",";
+            }
+            cout << endl;
+        }
+        
     }
 
 }

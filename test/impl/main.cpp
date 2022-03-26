@@ -33,10 +33,10 @@ int main(int args, char** argv){
     }
 
     {
-        StringSearch ss;
-        ss.search("one", "oneone");
+        //StringSearch ss;
+        //ss.search("one", "oneone");
 
-        KnuthMorrisPratt kmp("ababc");
-        kmp.search("hhhhhgggggababcggggg");
+        KnuthMorrisPratt kmp;
+        kmp.search("1234", "23");
     }
 }
