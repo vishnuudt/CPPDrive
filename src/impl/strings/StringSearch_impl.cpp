@@ -53,12 +53,13 @@ namespace Drive::strings{
             char* head = this->radix;
             while (*head != '\0'){
                 char& c = *head;
-                dfa[c][j] = dfa[c][x];
+                dfa[c][j] = dfa[c][x]; // Copy mismatch cases.
                 head++;
             }
 
-            dfa[pattern[j]][j] = j+1;   // Set match case. 
-            x = dfa[pattern[j]][x];     // Update restart state. 
+            char& p = pattern[j];
+            dfa[p][j] = j+1;   // Set match case. 
+            x = dfa[p][x];     // Update restart state. 
             print(dfa);
         } 
     }
@@ -79,7 +80,11 @@ namespace Drive::strings{
 
         tearDown();
 
-        if (j == stringLength) return i - stringLength;    // found
+        if (j == stringLength) {
+            int res = i - stringLength;
+            cout << "text:" << text << "pattern:" << pattern << "result:" << res << endl;
+            return res;    // found
+        }
         return n;   
     }
 
