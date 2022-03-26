@@ -31,11 +31,6 @@ namespace Drive::strings{
         this->radix = new char[]{'1','2', '3', '4', '5', '\0'};
         this->stringLength = pattern.length();
 
-        // build DFA from pattern
-        // dfa = new int*[radix]; 
-        /*for (char i = 0; i < radix ; ++i){
-            dfa[i] = new int[stringLength];
-        }*/
         char* head = this->radix;
         while (*head != '\0'){
             dfa[*head] = new int[stringLength];
@@ -46,9 +41,6 @@ namespace Drive::strings{
         cout << p0 << endl;
         dfa[p0][0] = 1; 
         for (int x = 0, j = 1; j < stringLength; j++) {
-            /*for (int c = 0; c < radix; c++) {
-                dfa[c][j] = dfa[c][x]; // Copy mismatch cases.
-            } */
 
             char* head = this->radix;
             while (*head != '\0'){
@@ -60,8 +52,10 @@ namespace Drive::strings{
             char& p = pattern[j];
             dfa[p][j] = j+1;   // Set match case. 
             x = dfa[p][x];     // Update restart state. 
-            print(dfa);
+            
         } 
+
+        print(dfa);
     }
 
 
@@ -95,16 +89,12 @@ namespace Drive::strings{
         delete [] dfa;
         radix = 0 ;
         stringLength = 0;*/
-    }
 
-    void KnuthMorrisPratt::print(int** dfa){
-        /*for (int i = 0; i < radix ; ++i){
-            int* column = dfa[i];
-            for (int j = 0; j < stringLength; ++j){
-                cout << column[j] << ",";
-            }
-            cout << endl;
-        }*/
+        for (auto iter = dfa.cbegin(); iter != dfa.cend(); ++iter){
+            int* p = iter->second;
+            delete p;
+        }
+        dfa.clear();
     }
 
     void KnuthMorrisPratt::print(unordered_map<char, int*> dfa){

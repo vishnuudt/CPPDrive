@@ -29,7 +29,6 @@ namespace Drive::strings{
 
             void setup(string pattern);
             void tearDown();
-            void print(int** dfa);
             void print(unordered_map<char, int*> dfa);
 
 
