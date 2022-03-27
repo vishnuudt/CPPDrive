@@ -23,7 +23,7 @@ namespace Drive::strings{
 
         private:
             char* radix;       // the radix
-            int stringLength;       // length of pattern
+            int patLen;       // length of pattern
             // int** dfa;       // the KMP automoton
             unordered_map<char, int*> dfa; 
 

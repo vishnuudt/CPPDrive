@@ -29,18 +29,18 @@ namespace Drive::strings{
 
     void KnuthMorrisPratt::setup(string pattern){
         this->radix = new char[]{'1','2', '3', '4', '5', '\0'};
-        this->stringLength = pattern.length();
+        this->patLen = pattern.length();
 
         char* head = this->radix;
         while (*head != '\0'){
-            dfa[*head] = new int[stringLength];
+            dfa[*head] = new int[patLen];
             head++;
         }
 
         char& p0 = pattern[0];
         cout << p0 << endl;
         dfa[p0][0] = 1; 
-        for (int x = 0, j = 1; j < stringLength; j++) {
+        for (int x = 0, j = 1; j < patLen; j++) {
 
             char* head = this->radix;
             while (*head != '\0'){
@@ -67,15 +67,15 @@ namespace Drive::strings{
         // simulate operation of DFA on text
         int n = text.length();
         int i, j;
-        for (i = 0, j = 0; i < n && j < stringLength; i++) {
+        for (i = 0, j = 0; i < n && j < patLen; i++) {
             char & c = text[i];
             j = dfa[c][j];
         }
 
         tearDown();
 
-        if (j == stringLength) {
-            int res = i - stringLength;
+        if (j == patLen) {
+            int res = i - patLen;
             cout << "text:" << text << "pattern:" << pattern << "result:" << res << endl;
             return res;    // found
         }
@@ -88,19 +88,20 @@ namespace Drive::strings{
         }
         delete [] dfa;
         radix = 0 ;
-        stringLength = 0;*/
+        patLen = 0;*/
 
         for (auto iter = dfa.cbegin(); iter != dfa.cend(); ++iter){
             int* p = iter->second;
             delete p;
         }
+        delete [] radix;
         dfa.clear();
     }
 
     void KnuthMorrisPratt::print(unordered_map<char, int*> dfa){
         for (auto iter = dfa.cbegin(); iter != dfa.cend(); ++iter){
             cout << iter->first << ",";
-            for (int j = 0; j < stringLength; ++j){
+            for (int j = 0; j < patLen; ++j){
                 cout << iter->second[j] << ",";
             }
             cout << endl;
