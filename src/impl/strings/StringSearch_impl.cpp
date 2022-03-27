@@ -38,7 +38,6 @@ namespace Drive::strings{
         }
 
         char& p0 = pattern[0];
-        cout << p0 << endl;
         dfa[p0][0] = 1; 
         for (int x = 0, j = 1; j < patLen; j++) {
 
@@ -48,14 +47,14 @@ namespace Drive::strings{
                 dfa[c][j] = dfa[c][x]; // Copy mismatch cases.
                 head++;
             }
-
+            print(dfa); //print
             char& p = pattern[j];
             dfa[p][j] = j+1;   // Set match case. 
             x = dfa[p][x];     // Update restart state. 
+            print(dfa);
             
         } 
-
-        print(dfa);
+        
     }
 
 
@@ -100,12 +99,17 @@ namespace Drive::strings{
 
     void KnuthMorrisPratt::print(unordered_map<char, int*> dfa){
         for (auto iter = dfa.cbegin(); iter != dfa.cend(); ++iter){
-            cout << iter->first << ",";
+            cout << "key: " << iter->first << " value:";
             for (int j = 0; j < patLen; ++j){
-                cout << iter->second[j] << ",";
+                cout << iter->second[j];
+                if (j < patLen -1){
+                    cout << "," ;
+                }
             }
             cout << endl;
         }
+
+        cout << "--------------------" << endl;
         
     }
 

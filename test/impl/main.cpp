@@ -37,6 +37,6 @@ int main(int args, char** argv){
         //ss.search("one", "oneone");
 
         KnuthMorrisPratt kmp;
-        kmp.search("1234", "23");
+        kmp.search("122334455443", "344");
     }
 }
