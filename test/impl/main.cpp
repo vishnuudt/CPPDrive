@@ -5,6 +5,7 @@
 #include "graphs/Flow_Network.h"
 #include "trees/TwoThree.h"
 #include "strings/StringSearch.h"
+#include "graphs/Traversal_paths.h"
 
 using namespace std;
 using namespace Drive::CPP17;
@@ -36,7 +37,19 @@ int main(int args, char** argv){
         //StringSearch ss;
         //ss.search("one", "oneone");
 
-        KnuthMorrisPratt kmp;
-        kmp.search("122334455443", "344");
+        //KnuthMorrisPratt kmp;
+        //kmp.search("122334455443", "344");
+    }
+
+    {
+        FlowNetwork&& g = FlowNetwork::exportItem();
+        DFS dfs(g, 0);
+        cout << "haspath:" << dfs.hasPathTo(3) << endl;
+        cout << "path:";
+        for (auto item: dfs.pathTo(3)){
+             cout << item << ",";
+        }
+        cout << endl;        
+
     }
 }

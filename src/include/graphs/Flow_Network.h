@@ -35,7 +35,9 @@ namespace Drive::CPP17::Graphs{
 
         fListFlowEdges edges(); 
 
-        static void exportItem();
+        int numVertices();
+
+        static FlowNetwork exportItem();
 
     private:
         int num_vertices{0};

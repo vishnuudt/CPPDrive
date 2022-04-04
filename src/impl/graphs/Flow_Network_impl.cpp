@@ -11,25 +11,29 @@ namespace Drive::CPP17::Graphs{
             auto& list = vect_FlowEdgeLists[i];
             list.clear();
         }
+
+        cout << "fnetwork cons" << endl;
     }
 
     FlowNetwork::~FlowNetwork(){
-
+        cout << "fnetwork des" << endl;
     }
 
     FlowNetwork::FlowNetwork(const FlowNetwork& ){
-
+        cout << "copy cons lVal fnetwork" << endl;
     }
 
     FlowNetwork::FlowNetwork(const FlowNetwork&& ){
-
+        cout << "copy cons RVal fnetwork" << endl;
     }
 
     FlowNetwork& FlowNetwork::operator=(const FlowNetwork& ){
+        std::cout << "assign op lval fnetwork" << std::endl;
         return *this;    
     }
 
     FlowNetwork& FlowNetwork::operator=(const FlowNetwork&& ){
+        std::cout << "assign op Rval fnetwork" << std::endl;
         return *this;
     }
 
@@ -60,7 +64,11 @@ namespace Drive::CPP17::Graphs{
         return flowEdges;
     }
 
-    void FlowNetwork::exportItem(){
+    int FlowNetwork::numVertices(){
+        return num_vertices;
+    }
+
+    FlowNetwork FlowNetwork::exportItem(){
         FlowNetwork f_Network(6, 8);
         FlowEdgesharedPtr edge1 = std::make_shared<FlowEdge>(0, 1, 2.0);
         FlowEdgesharedPtr edge2 = std::make_shared<FlowEdge>(0, 2, 3.0);
@@ -83,7 +91,7 @@ namespace Drive::CPP17::Graphs{
             cout << item->toString() << endl;
         }
 
-
+        return f_Network;
 
 
 
