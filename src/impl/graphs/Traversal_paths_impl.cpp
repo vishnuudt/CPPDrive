@@ -7,6 +7,13 @@ namespace Drive::CPP17::Graphs{
         marked = new bool[count]{};
         edgeTo = new int[count]{}; 
         traverse(g, source);
+        cout << "DFS cons" << endl;
+    }
+
+    DFS::~DFS(){
+        delete marked;
+        delete edgeTo;
+        cout << "DFS des" << endl;
     }
 
     bool DFS::hasPathTo(int w){

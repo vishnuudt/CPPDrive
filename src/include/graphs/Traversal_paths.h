@@ -12,6 +12,7 @@ namespace Drive::CPP17::Graphs{
 
         public:
             DFS(FlowNetwork& G, int v);
+            ~DFS();
             bool hasPathTo(int w);
             vector<int> pathTo(int w);
 
