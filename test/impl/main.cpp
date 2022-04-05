@@ -47,7 +47,15 @@ int main(int args, char** argv){
         cout << "haspath:" << dfs.hasPathTo(3) << endl;
         cout << "path:";
         for (auto item: dfs.pathTo(3)){
-             cout << item << ",";
+             cout << item << " :: ";
+        }
+        cout << endl;  
+
+        BFS traverse(g, 0);
+        cout << "haspath:" << traverse.hasPathTo(5) << endl;
+        cout << "path:";
+        for (auto item: traverse.pathTo(5)){
+             cout << item << " at distance:" << traverse.distToVertex(item) << " :: ";
         }
         cout << endl;        
 
