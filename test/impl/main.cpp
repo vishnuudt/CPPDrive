@@ -17,8 +17,22 @@ using namespace Drive::CPP17::Trees;
 using namespace Drive::strings;
 using namespace Drive::CPP17::UF;
 
+CPP17Features createCPP17Features(int size)
+{
+  return CPP17Features(size);
+}
+
+
 int main(int args, char** argv){
     {
+        CPP17Features h1(1000);                // regular constructor
+        CPP17Features h2(h1);                  // copy constructor (lvalue in input)
+        CPP17Features h3 = createCPP17Features(2000); // move constructor (rvalue in input) (1) 
+
+        h2 = h3;                        // assignment operator (lvalue in input)
+        h2 = createCPP17Features(500);         // move assignment operator (rvalue in input)
+        CPP17Features h4(std::move(h2));
+        
         // CPP17Features features;
         // features.exportItem();
     }
@@ -67,6 +81,7 @@ int main(int args, char** argv){
 
 
     {
+        /*
         unique_ptr<Drive::CPP17::UF::UF> uf = make_unique<Drive::CPP17::UF::UF>(10);
         uf->union_Command(4, 3);
         uf->union_Command(3, 8);
@@ -82,7 +97,7 @@ int main(int args, char** argv){
         uf->connected_Query(4, 9);
 
         cout << "total count:" << uf->count_items() << endl;
-  
+        */
 
     }
 }

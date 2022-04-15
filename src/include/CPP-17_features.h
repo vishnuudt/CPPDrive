@@ -31,17 +31,17 @@ auto length_at_compile_time(T const& value){
 class CPP17Features{
 public:
 
-    CPP17Features();
+    CPP17Features(int size);
 
     virtual ~CPP17Features();
 
     CPP17Features(const CPP17Features& );
 
-    CPP17Features(const CPP17Features&& );
+    CPP17Features(CPP17Features&& );
 
     CPP17Features& operator=(const CPP17Features& );
 
-    CPP17Features& operator=(const CPP17Features&& );
+    CPP17Features& operator=(CPP17Features&& );
 
     virtual void exportItem();
 
@@ -49,7 +49,8 @@ public:
 private:
 		seconds secs{10};
 		milliseconds millisecs{200};
-        std::unordered_map<std::string, std::string> _mapElement;
+        int*   m_data;
+        int m_size;
 
 };
 }

@@ -2,35 +2,61 @@
 
 namespace Drive::CPP17{
 
-    CPP17Features::CPP17Features(){
+    CPP17Features::CPP17Features(int size): m_size{size}{
         std::cout << "cons" << std::endl;
+        this->m_data = new int[size];
     }
 
     CPP17Features::~CPP17Features(){
         std::cout << "des" << std::endl;
-        _mapElement.erase(_mapElement.begin());
+        delete [] m_data;
     }
 
-    CPP17Features::CPP17Features(const CPP17Features& ){
+    CPP17Features::CPP17Features(const CPP17Features& other){
         std::cout << "copy cons lVal" << std::endl;
+        m_data = new int[other.m_size];  // (1)
+        std::copy(other.m_data, other.m_data + other.m_size, m_data);  // (2)
+        m_size = other.m_size;
     }
 
-    CPP17Features::CPP17Features(const CPP17Features&& ){
+    CPP17Features::CPP17Features(CPP17Features&& other){
         std::cout << "copy cons RVal" << std::endl;
+        m_data = other.m_data;   // (1)
+        m_size = other.m_size;
+        other.m_data = nullptr;  // (2)
+        other.m_size = 0;
     }
 
-    CPP17Features& CPP17Features::operator=(const CPP17Features& ){
+    CPP17Features& CPP17Features::operator=(const CPP17Features& other){
         std::cout << "assign op lval" << std::endl;
-        return *this;
+        if(this == &other) return *this;  // (1)
+        delete[] m_data;  // (2)
+
+        m_data = new int[other.m_size];
+        std::copy(other.m_data, other.m_data + other.m_size, m_data);
+        m_size = other.m_size;
+        return *this;  // (3)
     }
 
-    CPP17Features& CPP17Features::operator=(const CPP17Features&& ){
+    CPP17Features& CPP17Features::operator=(CPP17Features&& other){
         std::cout << "assign op rval" << std::endl;
+        
+        if (this == &other) return *this;
+
+        delete[] m_data;         // (1)
+
+        m_data = other.m_data;   // (2)
+        m_size = other.m_size;
+
+        other.m_data = nullptr;  // (3)
+        other.m_size = 0;
+
         return *this;
     }
 
     void CPP17Features::exportItem(){
         std::cout << secs.count() << std::endl;
+        std::unordered_map<std::string, std::string> _mapElement;
 
         int n{64};
         string s{"Some"};
