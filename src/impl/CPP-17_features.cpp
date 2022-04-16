@@ -3,24 +3,24 @@
 namespace Drive::CPP17{
 
     CPP17Features::CPP17Features(int size): m_size{size}{
-        std::cout << "cons" << std::endl;
+        std::cout << "cons:" << this << std::endl;
         this->m_data = new int[size];
     }
 
     CPP17Features::~CPP17Features(){
-        std::cout << "des" << std::endl;
+        std::cout << "des:" << this << std::endl;
         delete [] m_data;
     }
 
     CPP17Features::CPP17Features(const CPP17Features& other){
-        std::cout << "copy cons lVal" << std::endl;
+        std::cout << "copy cons lVal:" << this << " that:" << &other << std::endl;
         m_data = new int[other.m_size];  // (1)
         std::copy(other.m_data, other.m_data + other.m_size, m_data);  // (2)
         m_size = other.m_size;
     }
 
     CPP17Features::CPP17Features(CPP17Features&& other){
-        std::cout << "copy cons RVal" << std::endl;
+        std::cout << "copy cons RVal:" << this << " that:" << &other << std::endl;
         m_data = other.m_data;   // (1)
         m_size = other.m_size;
         other.m_data = nullptr;  // (2)
@@ -28,7 +28,7 @@ namespace Drive::CPP17{
     }
 
     CPP17Features& CPP17Features::operator=(const CPP17Features& other){
-        std::cout << "assign op lval" << std::endl;
+        std::cout << "assign op lval:" << this << " that:" << &other<< std::endl;
         if(this == &other) return *this;  // (1)
         delete[] m_data;  // (2)
 
@@ -39,7 +39,7 @@ namespace Drive::CPP17{
     }
 
     CPP17Features& CPP17Features::operator=(CPP17Features&& other){
-        std::cout << "assign op rval" << std::endl;
+        std::cout << "assign op rval:" << this << " that:" << &other << std::endl;
         
         if (this == &other) return *this;
 
@@ -52,6 +52,10 @@ namespace Drive::CPP17{
         other.m_size = 0;
 
         return *this;
+    }
+
+    void CPP17Features::print(string&& message){
+        cout << this << " data: " << this->m_data << " message:" << message << endl;
     }
 
     void CPP17Features::exportItem(){

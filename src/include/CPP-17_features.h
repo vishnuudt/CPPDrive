@@ -45,6 +45,8 @@ public:
 
     virtual void exportItem();
 
+    void print(string&& message);
+
 
 private:
 		seconds secs{10};

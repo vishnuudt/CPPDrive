@@ -17,6 +17,7 @@ using namespace Drive::CPP17::Trees;
 using namespace Drive::strings;
 using namespace Drive::CPP17::UF;
 
+// RAII resource acquisition is initialization
 CPP17Features createCPP17Features(int size)
 {
   return CPP17Features(size);
@@ -25,16 +26,31 @@ CPP17Features createCPP17Features(int size)
 
 int main(int args, char** argv){
     {
-        CPP17Features h1(1000);                // regular constructor
-        CPP17Features h2(h1);                  // copy constructor (lvalue in input)
-        CPP17Features h3 = createCPP17Features(2000); // move constructor (rvalue in input) (1) 
+        // regular constructor
+        CPP17Features h1(1000);    
 
-        h2 = h3;                        // assignment operator (lvalue in input)
-        h2 = createCPP17Features(500);         // move assignment operator (rvalue in input)
+        // copy constructor (lvalue in input)
+        CPP17Features h2(h1);         
+
+        // rvalue in input but RVO optimizes
+        CPP17Features h3 = createCPP17Features(2000);
+
+        // assignment operator (lvalue in input)
+        h2 = h3;  
+
+        // move assignment operator (rvalue in input)                      
+        h2 = createCPP17Features(500); 
+        h2.print("move assign built me");  
+
+        // move constructor rvalue in input      
         CPP17Features h4(std::move(h2));
+        h4.print("move construction build me");
+        h2.print("moved myself out");
         
         // CPP17Features features;
         // features.exportItem();
+
+        cout << "out of scope" << endl;
     }
 
     {
