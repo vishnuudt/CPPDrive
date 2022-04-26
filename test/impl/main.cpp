@@ -8,6 +8,7 @@
 #include "trees/TwoThree.h"
 #include "strings/StringSearch.h"
 #include "graphs/Traversal_paths.h"
+#include "trees/IntervalSearch.h"
 
 using namespace std;
 using namespace Drive::CPP17;
@@ -26,6 +27,7 @@ CPP17Features createCPP17Features(int size)
 
 int main(int args, char** argv){
     {
+        /**
         // regular constructor
         CPP17Features h1(1000);    
 
@@ -51,6 +53,7 @@ int main(int args, char** argv){
         // features.exportItem();
 
         cout << "out of scope" << endl;
+        **/
     }
 
     {
@@ -114,6 +117,11 @@ int main(int args, char** argv){
 
         cout << "total count:" << uf->count_items() << endl;
         */
+
+    }
+
+    {
+        IntervalSearchTree ist;
 
     }
 }
