@@ -121,7 +121,7 @@ int main(int args, char** argv){
     }
 
     {
-        IntervalSearchTree ist;
+        IntervalSearchTree::exportItem();
 
     }
 }
