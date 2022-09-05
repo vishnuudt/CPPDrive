@@ -28,7 +28,7 @@ namespace Drive::CPP17::Trees {
     }
 
     bool IntervalSearchTree::search(Interval2D& item){
-        IntervalNode* x = root.get();
+        IntervalNode* x = top_root.get();
 
         while(x != nullptr){
             if (x->interval.isIntersect(item)){
@@ -47,12 +47,15 @@ namespace Drive::CPP17::Trees {
 
 
     void IntervalSearchTree::put(Interval2D& item){
-        put(root.get(), item);
+        IntervalNode* temp = put(top_root.get(), item);
+        if (top_root == nullptr){
+            top_root = std::unique_ptr<IntervalNode>(temp);
+        }
     }
 
     IntervalNode* IntervalSearchTree::put(IntervalNode* root, Interval2D& i){
         // Base case: Tree is empty, new node becomes root
-        if (root == NULL)
+        if (root == nullptr)
             return new IntervalNode(i);
     
         // Get low value of interval at root
@@ -75,12 +78,16 @@ namespace Drive::CPP17::Trees {
     }
 
     void IntervalSearchTree::all(){
-        if (root == NULL) return;
-        all(root.get());
+        if (top_root == nullptr) return;
+        all(top_root.get());
 
     }
 
     void IntervalSearchTree::all(IntervalNode* root){
+        if (root == nullptr){
+            return;
+        }
+
         all(root->left);
     
         cout << "[" << root->interval.getMin() << ", " << root->interval.getMax() << "]"
@@ -97,8 +104,13 @@ namespace Drive::CPP17::Trees {
         Interval2D three(17, 19);
         Interval2D four(21, 24);
 
-        
+        IntervalSearchTree ist;
+        ist.put(one);
+        ist.put(two);
+        ist.put(three);
+        ist.put(four);
 
+        ist.all();
     }
 
 }

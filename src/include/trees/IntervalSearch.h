@@ -44,7 +44,7 @@ class IntervalSearchTree{
 
 
     private:
-        unique_ptr<IntervalNode> root;
+        unique_ptr<IntervalNode> top_root;
         IntervalNode* put(IntervalNode* root, Interval2D& item);
         void all(IntervalNode* root);
 
