@@ -12,9 +12,10 @@ namespace Drive::CPP17::Trees{
 class Interval2D{
 public:
     Interval2D(double mi, double ma);
-    bool isIntersect(Interval2D& that);
-    double getMin();
-    double getMax();
+    ~Interval2D();
+    bool isIntersect(const Interval2D& that);
+    double getMin() const;
+    double getMax() const;
 
 private:
     const double min;
@@ -25,6 +26,7 @@ private:
 class IntervalNode{
     public:
         IntervalNode(Interval2D interval);
+        ~IntervalNode();
         IntervalNode* left;
         IntervalNode* right;
         Interval2D interval;
@@ -36,7 +38,7 @@ class IntervalNode{
 
 class IntervalSearchTree{
     public:
-     bool search(Interval2D& item);
+     bool search(const Interval2D& item);
      void put(Interval2D& item);
      void all();
      static void exportItem();   

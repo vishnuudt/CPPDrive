@@ -6,28 +6,40 @@ namespace Drive::CPP17::Trees {
         if (mi > ma){
             throw invalid_argument("min should be less than max");
         }
+        cout << "Interval 2D cons" << endl;
     }
 
-    bool Interval2D::isIntersect(Interval2D& that){
+    Interval2D::~Interval2D(){
+        cout << "Interval 2D des" << endl;
+    }
+
+    bool Interval2D::isIntersect(const Interval2D& that){
         if ((this->max < that.min)  ||  that.max < this->min ){
             return false;
         }
         return true;
     }
 
-    double Interval2D::getMin(){
-        return this->min;
+    double Interval2D::getMin() const {
+        return min;
     }
 
-    double Interval2D::getMax(){
-        return this->max;
+    double Interval2D::getMax() const {
+        return max;
     }
 
 
     IntervalNode::IntervalNode(Interval2D item):interval(item){
+        cout << "IntervalNode cons" << endl;
     }
 
-    bool IntervalSearchTree::search(Interval2D& item){
+    IntervalNode::~IntervalNode(){
+        delete left;
+        delete right;
+        cout << "IntervalNode des" << endl;
+    }
+
+    bool IntervalSearchTree::search(const Interval2D& item){
         IntervalNode* x = top_root.get();
 
         while(x != nullptr){
@@ -111,6 +123,12 @@ namespace Drive::CPP17::Trees {
         ist.put(four);
 
         ist.all();
+        bool result = ist.search(Interval2D(6,9));
+        cout << "searching (6,9): " << result;
+
+        result = ist.search(Interval2D(24, 30));
+        cout << "searching (6,9): " << result;
+
     }
 
 }
