@@ -9,6 +9,7 @@
 #include "strings/StringSearch.h"
 #include "graphs/Traversal_paths.h"
 #include "trees/IntervalSearch.h"
+#include "trees/MerkleTree.h"
 
 using namespace std;
 using namespace Drive::CPP17;
@@ -121,7 +122,12 @@ int main(int args, char** argv){
     }
 
     {
-        IntervalSearchTree::exportItem();
+       // IntervalSearchTree::exportItem();
 
+    }
+
+    {
+
+        MerkleTree::exportItem();
     }
 }
