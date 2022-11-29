@@ -30,8 +30,54 @@ namespace Drive::CPP17::Trees{
         return *this;
     }
 
+    unique_ptr<MerkleNode> MerkleTree::build(vector<string>& values){
+        return nullptr;
+    }
+
+    unique_ptr<MerkleNode> MerkleTree::addLeaf(unique_ptr<MerkleNode>& root, 
+    string& value){
+        return nullptr;
+    }
+
     void MerkleTree::exportItem(){
-        cout << "I am merkle" << endl;
+        hash<string> h;
+        const size_t value = h("vishnu");
+        cout << value << endl;
+    }
+
+    size_t MerkleNode::computeHash(){
+
+        return 0;
+    }
+    
+    bool MerkleNode::validate() const{
+        return true;
+    }
+
+    MerkleNode::MerkleNode(){
+        std::cout << "cons MerkleNode" << std::endl;
+    }
+
+    MerkleNode::~MerkleNode(){
+        std::cout << "des MerkleNode" << std::endl;
+    }
+
+    MerkleNode::MerkleNode(const MerkleNode& ){
+        std::cout << "copy cons lval MerkleNode" << std::endl;
+    }
+
+    MerkleNode::MerkleNode(const MerkleNode&& ){
+        std::cout << "copy cons rval MerkleNode" << std::endl;
+    }
+
+    MerkleNode& MerkleNode::operator=(const MerkleNode& ){
+        std::cout << "assign lval MerkleNode" << std::endl;
+        return *this;
+    }
+
+    MerkleNode& MerkleNode::operator=(const MerkleNode&& ){
+        std::cout << " assign rval MerkleNode" << std::endl;
+        return *this;
     }
 
 }
