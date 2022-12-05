@@ -14,14 +14,17 @@ class MerkleNode {
  public:
     unique_ptr<MerkleNode> left;
     unique_ptr<MerkleNode> right;
-    size_t hash;
-    string value;
+    size_t hash_val;
+    string value_val;
+    std::hash<string> h;
 
  public:
     virtual size_t computeHash(); 
     virtual bool validate() const;
 
-    MerkleNode();
+    MerkleNode(string w, 
+            unique_ptr<MerkleNode> left_, 
+            unique_ptr<MerkleNode> right_);
 
     virtual ~MerkleNode();
 
@@ -51,14 +54,16 @@ class MerkleTree {
 
     MerkleTree& operator=(const MerkleTree&& );
 
-    unique_ptr<MerkleNode> build(vector<string>& values);
+    unique_ptr<MerkleNode>& build(vector<string>& values);
 
-    unique_ptr<MerkleNode> addLeaf(unique_ptr<MerkleNode>& root, string& value);
-
+    bool validate();
+    
     static void exportItem();
 
     private: 
-        unique_ptr<MerkleNode> root;
+        unique_ptr<MerkleNode> root;  
+        unique_ptr<MerkleNode> addLeaf(unique_ptr<MerkleNode>& root, string& value);
+     
 };
 
 }

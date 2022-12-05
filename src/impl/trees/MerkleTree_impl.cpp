@@ -30,31 +30,67 @@ namespace Drive::CPP17::Trees{
         return *this;
     }
 
-    unique_ptr<MerkleNode> MerkleTree::build(vector<string>& values){
-        return nullptr;
+    unique_ptr<MerkleNode>& MerkleTree::build(vector<string>& values){
+        string first = values.at(0);
+        root = make_unique<MerkleNode>(first, nullptr, nullptr);
+        for (auto&& item : values){
+            root = addLeaf(root, item);
+        }
+        return root;
     }
 
     unique_ptr<MerkleNode> MerkleTree::addLeaf(unique_ptr<MerkleNode>& root, 
     string& value){
-        return nullptr;
+        auto&& uniqMerkleNodePtr = make_unique<MerkleNode>(value, std::move(root), nullptr);
+        return uniqMerkleNodePtr;
     }
 
-    void MerkleTree::exportItem(){
-        hash<string> h;
-        const size_t value = h("vishnu");
-        cout << value << endl;
-    }
-
-    size_t MerkleNode::computeHash(){
-
-        return 0;
-    }
-    
-    bool MerkleNode::validate() const{
+    bool MerkleTree::validate(){
+        if(root){
+            root->validate();
+        }
         return true;
     }
 
-    MerkleNode::MerkleNode(){
+    void MerkleTree::exportItem(){
+        vector<string> values{"a", "b", "c", "d"};
+        MerkleTree mTree;
+        mTree.build(values);
+        mTree.validate();
+    }
+
+
+
+    size_t MerkleNode::computeHash(){
+        hash_val = h(value_val);
+        return hash_val;
+    }
+    
+    bool MerkleNode::validate() const{
+        cout << "value is:" 
+        << value_val << " " 
+        << "hash is:" << hash_val << endl;
+        if (left){
+            left->validate();
+        }
+        if (right){
+            right->validate();
+        }
+        return true;
+    }
+
+    MerkleNode::MerkleNode(string w, 
+        unique_ptr<MerkleNode> left_, 
+        unique_ptr<MerkleNode> right_): value_val(w){
+        computeHash();
+        if (left_){
+            left = std::move(left_);
+            left->computeHash();
+        }
+        if(right_){
+            right = std::move(right_);
+            right->computeHash();
+        }
         std::cout << "cons MerkleNode" << std::endl;
     }
 
