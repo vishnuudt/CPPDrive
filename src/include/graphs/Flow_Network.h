@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <forward_list>
 #include <memory>
+#include <vector>
 #include "Flow_Edge.h"
 
 using namespace std;

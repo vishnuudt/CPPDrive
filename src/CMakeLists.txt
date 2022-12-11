@@ -10,7 +10,7 @@ add_library(${LIBRARY_NAME} SHARED
         ${${PROJECT_NAME}_SOURCES})
 
 message(STATUS "Sqlite ${SQLITE3_LIBRARIES} at ${SQLITE3_INCLUDE_DIRS}")
-message(STATUS "Boost TnS ${Boost_INCLUDE_DIRS} ${Boost_LIBRARIES}")
+message(STATUS "Boost ${Boost_INCLUDE_DIRS} ${Boost_LIBRARIES}")
 
 target_include_directories(${LIBRARY_NAME}
         PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
