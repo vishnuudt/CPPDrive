@@ -10,6 +10,7 @@
 #include "graphs/Traversal_paths.h"
 #include "trees/IntervalSearch.h"
 #include "trees/MerkleTree.h"
+#include "trees/RectangleTree.h"
 
 using namespace std;
 using namespace Drive::CPP17;
