@@ -129,6 +129,10 @@ int main(int args, char** argv){
 
     {
 
-        MerkleTree::exportItem();
+        // MerkleTree::exportItem();
+    }
+
+    {
+        RTree::exportItem();
     }
 }
