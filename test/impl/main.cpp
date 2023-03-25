@@ -11,6 +11,7 @@
 #include "trees/IntervalSearch.h"
 #include "trees/MerkleTree.h"
 #include "trees/RectangleTree.h"
+#include "lists/SkipLists.h"
 
 using namespace std;
 using namespace Drive::CPP17;
@@ -19,6 +20,7 @@ using namespace Drive::CPP17::Graphs;
 using namespace Drive::CPP17::Trees;
 using namespace Drive::strings;
 using namespace Drive::CPP17::UF;
+using namespace Drive::CPP17::Lists;
 
 // RAII resource acquisition is initialization
 CPP17Features createCPP17Features(int size)
@@ -134,5 +136,9 @@ int main(int args, char** argv){
 
     {
         RTree::exportItem();
+    }
+
+    {
+        SkipLists::exportItem();
     }
 }
