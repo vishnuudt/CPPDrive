@@ -135,7 +135,7 @@ int main(int args, char** argv){
     }
 
     {
-        RTree::exportItem();
+        // RTree::exportItem();
     }
 
     {

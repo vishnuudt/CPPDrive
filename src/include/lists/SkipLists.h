@@ -16,12 +16,13 @@ struct SkipListNode {
     SkipListNode **next;
 
     SkipListNode(string input, int hei):x{input}, height{hei}{
-
+        length = new int[height+1];
+        next = new SkipListNode*[height + 1];
+        cout << "cons of skip list node " << x << endl;
     }
 
     ~SkipListNode(){
-        delete length;
-        delete [] next;
+        cout << "des of skip list node " << x << endl;
     }
 };
 

@@ -2,12 +2,14 @@
 
 namespace Drive::CPP17::Lists{
 
-    SkipLists::SkipLists():n{}, h{}{
+    SkipLists::SkipLists():n{0}, h{0}{
         std::cout << "cons SkipLists" << std::endl;
+        sentinel = newNode("sentinel", sizeof(int)*8);
     }
 
     SkipLists::~SkipLists(){
         std::cout << "des SkipLists" << std::endl;
+        delete sentinel;
     }
 
     SkipLists::SkipLists(const SkipLists& ){
@@ -30,9 +32,39 @@ namespace Drive::CPP17::Lists{
 
     void SkipLists::exportItem(){
         SkipLists skips;
+        int sample = 2;
+        for (int i = 0; i < sample; ++i){
+            string genValue = "base-" + std::to_string(i);
+            skips.add(i, genValue);
+        }
+
+        for (int i = 0; i < sample; ++i){
+            string expected = "base-" + std::to_string(i);
+            string actual = skips.get(i);
+            cout << "After Add expected: " << expected << " actual: " << actual << endl;
+        }
+
+        for (int i = 0; i < sample; ++i){
+            string expected = "base-reset" + std::to_string(i);
+            string actual = skips.set(i, expected);
+            cout << "expected: " << expected << " actual: " << actual << endl;
+        }
+
+        for (int i = 0; i < sample; ++i){
+            string expected = "base-reset" + std::to_string(i);
+            string actual = skips.get(i);
+            cout << "After set expected: " << expected << " actual: " << actual << endl;
+        }
+
+         for (int i = 0; i < sample; ++i){
+            string expected = "base-reset" + std::to_string(i);
+            string actual = skips.remove(i);
+            cout << "After delete expected: " << expected << " actual: " << actual << endl;
+        }
+        
     }
 
-    string SkipLists::get(int i) {
+    string SkipLists::get(int i) {  
         return findPred(i)->next[0]->x;
     }
 
@@ -45,8 +77,9 @@ namespace Drive::CPP17::Lists{
 
     void SkipLists::add(int i, string x) {
         SkipListNode *w = newNode(x, pickHeight());
-        if (w->height > h)
-        h = w->height;
+        if (w->height > h){
+            h = w->height;
+        }       
         add(i, w);
     }
 
@@ -57,17 +90,17 @@ namespace Drive::CPP17::Lists{
     int r = h;
     int j = -1; // index of node u
     while (r >= 0) {
-        while (u->next[r] != NULL && j + u->length[r] < i) {
+        while (u->next[r] != nullptr && j + u->length[r] < i) {
             j += u->length[r];
             u = u->next[r];
         }
         u->length[r]--; // for the node we are removing
-        if (j + u->length[r] + 1 == i && u->next[r] != NULL) {
+        if (j + u->length[r] + 1 == i && u->next[r] != nullptr) {
             x = u->next[r]->x;
             u->length[r] += u->next[r]->length[r];
             del = u->next[r];
             u->next[r] = u->next[r]->next[r];
-            if (u == sentinel && u->next[r] == NULL)
+            if (u == sentinel && u->next[r] == nullptr)
             h--;
         }
         r--;
@@ -108,7 +141,7 @@ namespace Drive::CPP17::Lists{
         int r = h;
         int j = -1; // index of u
         while (r >= 0) {
-            while (u->next[r] != NULL && j + u->length[r] < i) {
+            while (u->next[r] != nullptr && j + u->length[r] < i) {
                 j += u->length[r];
                 u = u->next[r];
             }
@@ -132,7 +165,9 @@ namespace Drive::CPP17::Lists{
     }
 
     void SkipLists::deleteNode(SkipListNode* todelete){
-        delete todelete;
+        // delete todelete->length;
+        // delete[] todelete->next;
+        // delete todelete;
     }
 
 }
