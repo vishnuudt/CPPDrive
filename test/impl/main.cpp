@@ -12,6 +12,7 @@
 #include "trees/MerkleTree.h"
 #include "trees/RectangleTree.h"
 #include "lists/SkipLists.h"
+#include "trees/ScapeGoat.h"
 
 using namespace std;
 using namespace Drive::CPP17;
@@ -139,6 +140,10 @@ int main(int args, char** argv){
     }
 
     {
-        SkipLists::exportItem();
+        //SkipLists::exportItem();
+    }
+
+    {
+        ScapeGoatTree::exportItem();
     }
 }
