@@ -32,7 +32,6 @@ CPP17Features createCPP17Features(int size)
 
 int main(int args, char** argv){
     {
-        /**
         // regular constructor
         CPP17Features h1(1000);    
 
@@ -58,32 +57,31 @@ int main(int args, char** argv){
         // features.exportItem();
 
         cout << "out of scope" << endl;
-        **/
-    }
-
-    {
-        // IndexedMinPQ::exportItem();
 
     }
 
     {
-        // FlowNetwork::exportItem();
+        IndexedMinPQ::exportItem();
+
     }
 
     {
-        //TwoThreeTree::exportItem();
+        FlowNetwork::exportItem();
     }
 
     {
-        //StringSearch ss;
-        //ss.search("one", "oneone");
+        TwoThreeTree::exportItem();
+    }
 
-        //KnuthMorrisPratt kmp;
+    {
+        StringSearch ss;
+        ss.search("one", "oneone");
+
+        KnuthMorrisPratt kmp;
         //kmp.search("122334455443", "344");
     }
 
     {
-        /*
         FlowNetwork&& g = FlowNetwork::exportItem();
         DFS dfs(g, 0);
         cout << "haspath:" << dfs.hasPathTo(3) << endl;
@@ -100,12 +98,10 @@ int main(int args, char** argv){
              cout << item << " at distance:" << traverse.distToVertex(item) << " :: ";
         }
         cout << endl;        
-        */
     }
 
 
     {
-        /*
         unique_ptr<Drive::CPP17::UF::UF> uf = make_unique<Drive::CPP17::UF::UF>(10);
         uf->union_Command(4, 3);
         uf->union_Command(3, 8);
@@ -121,22 +117,20 @@ int main(int args, char** argv){
         uf->connected_Query(4, 9);
 
         cout << "total count:" << uf->count_items() << endl;
-        */
+    }
+
+    {
+       //IntervalSearchTree::exportItem();
 
     }
 
     {
-       // IntervalSearchTree::exportItem();
 
+        MerkleTree::exportItem();
     }
 
     {
-
-        // MerkleTree::exportItem();
-    }
-
-    {
-        // RTree::exportItem();
+        RTree::exportItem();
     }
 
     {
